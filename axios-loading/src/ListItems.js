@@ -1,9 +1,9 @@
 import React from 'react';
 
-function ListItems({studentList}) {
+function ListItems({userList}) {
   return (
     <div>
-      <p>{studentList.name} - {studentList.email}</p>
+      <p>{userList.name} - {userList.email}</p>
     </div>
   );
 }

@@ -6,12 +6,12 @@ import Loading from "./Loading";
 
 function App() {
 
-  const [studentList, setStudentList] = useState([]);
+  const [userList, setUserList] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     axios.get('https://jsonplaceholder.typicode.com/users').then((response) => {
-      setStudentList(response.data)
+      setUserList(response.data)
       setLoading(true);
 
     }).catch((err)=>{
@@ -19,15 +19,15 @@ function App() {
     });
     },[]);
 
-    console.log(studentList);
+    console.log(userList);
     console.log(loading);
 
   return (
     <div className="App">
       <div>
         {
-        loading ? studentList.map((studentList, index) => {
-          return <ListItems key={index} studentList={studentList} /> 
+        loading ? userList.map((userList, index) => {
+          return <ListItems key={index} userList={userList} /> 
           }) : <Loading />
           }
       </div>
