@@ -1,23 +1,37 @@
-import logo from './logo.svg';
+import React, {useState, useEffect } from "react";
+import axios from 'axios';
 import './App.css';
+import ListItems from "./ListItems";
+import Loading from "./Loading";
 
 function App() {
+
+  const [studentList, setStudentList] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    axios.get('https://jsonplaceholder.typicode.com/users').then((response) => {
+      setStudentList(response.data)
+      setLoading(true);
+
+    }).catch((err)=>{
+      console.log(err);
+    });
+    },[]);
+
+    console.log(studentList);
+    console.log(loading);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        {
+        loading ? studentList.map((studentList, index) => {
+          return <ListItems key={index} studentList={studentList} /> 
+          }) : <Loading />
+          }
+      </div>
+     
     </div>
   );
 }
